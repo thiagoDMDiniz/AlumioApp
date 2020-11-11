@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ALUMIO</title>
+
+    <!-- CSS do Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/public/assets/css/estilos.css">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+      <a class="navbar-brand" href="#">ALUMIO</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Alunos
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/professores">Professores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/notas">Notas</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h3>Alunos</h3>
+      <form action="/alunos" method="POST">
+        <div class="row">
+          <div class="col-md-4">
+            <input required class="input-edicao" type="text" name="nome" placeholder="Nome...">
+          </div>
+          <div class="col-md-4">
+            <select class="input-edicao" name="professor">
+              {{#professores}}
+              <option value="{{_id}}">{{nome}}</option>
+              {{/professores}}
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button class="botao"  type="submit">Adicionar</button>
+          </div>
+        </div>
+      </form>
+      <br>
+      <table class="table">
+        <thead>
+              <tr>
+                <th class="sem-borda" scope="col">Nome</th>
+                <th class="sem-borda" scope="col">Professor</th>
+              </tr>
+        </thead>
+        <tbody>
+          {{#alunos}}
+            <tr class="form-lista-usuario" data-href='/aluno/{{_id}}'>
+                <th scope="row">{{nome}}</th>
+                <td>{{professor.nome}}</td>
+            </tr>
+          {{/alunos}}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+      $(".form-lista-usuario").click(function() {
+          document.location = $(this).data('href');
+      });
+    </script>
+
+  </body>
+</html>

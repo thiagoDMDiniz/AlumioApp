@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ALUMIO</title>
+
+    <!-- CSS do Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/public/assets/css/estilos.css">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+      <a class="navbar-brand" href="#">ALUMIO</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Alunos</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/professores">Professores
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/notas">Notas</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+
+    <div class="container">
+      <h3>Professor</h3>
+      <span class="titulo">Dados</span>
+      <button class="botao" onclick="editarDados()">Editar</button>
+      <table class="table visualizacao-dados">
+        <tbody>
+          {{#professores}}
+          <tr>
+              <th class="sem-borda">Nome</th>
+              <td class="sem-borda">{{nome}}</td>
+          </tr>
+          <tr>
+              <th>Materia</th>
+              <td>{{materia}}</td>
+          </tr>
+          {{/professores}}
+        </tbody>
+      </table>
+
+
+      {{#professores}}
+      <form action="/professor/{{_id}}/editar" method="POST">
+        <table class="table edicao-dados">
+          <tbody>
+            <tr>
+                <th class="sem-borda">Nome</th>
+                <td class="sem-borda"><input type="text" name="nome" value="{{nome}}"></td>
+            </tr>
+            <tr>
+                <th>Materia</th>
+                <td><input type="text" name="materia" value="{{materia}}"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row linha-botoes edicao-dados">
+          <input class="botao" type="submit" value="Salvar">
+          <button class="botao" type="button" onclick="editarDados()">Cancelar</button>
+          
+        </div>
+      </form>
+      <a class="botao ajuste-link-botao botao-risco" href="/professor/{{_id}}/excluir">Excluir</a>
+      {{/professores}}
+      <div class="espacador"></div>
+
+      <span class="titulo">Alunos</span>
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="sem-borda" scope="col">Nome</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#professores}}
+          {{#alunos}}
+          <tr>
+            <th scope="row">{{nome}}</th>
+          </tr>
+          {{/alunos}}
+          {{^alunos}}
+            <tr>
+              <td>Nenhum aluno cadastrado para o professor.</td>
+            </tr>
+          {{/alunos}}
+          {{/professores}}
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- JavaScript do Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+      crossorigin="anonymous"></script>
+    <!-- JavaScript personalizado -->
+    <script type="text/javascript" src="/public/assets/js/scripts.js"></script>
+
+  </body>
+</html>
